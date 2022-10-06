@@ -1,0 +1,15 @@
+[
+  {
+    "timeStamp": 1665018089947,
+    "productos": [
+      {
+        "nombre": "Heladera",
+        "descripcion": "Heladera frio seco",
+        "codigo": "111111",
+        "foto": "https://www.example.com.uy",
+        "precio": 1500,
+        "stock": 20,
+        "timeStamp": 1665018027517,
+        "id": 1
+      }
+]
