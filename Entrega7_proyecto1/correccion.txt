@@ -1,0 +1,12 @@
+1- En update de productos no estás modificando, sino eliminando el producto a modificar y luego insertando uno nuevo con un ID diferente. 
+Podrías buscar ese producto, y cuando lo encuentres le cambias los datos que te pasaron.
+2- En addProduct y deleteProd no es necesario hacer el push de target, ya que al encontrarlo en el array de carritos, y ser un objeto ya se modificó en el array 
+de carritos porque el acceso es por referencia
+3- En deleteById antes de filtrar o escribir en archivo, podés corroborar si aux no tiene un valor para devolver enseguida 404 para no tener que ejecutar todas 
+las demás instrucciones en caso que no encuentre el recurso a eliminar.
+4- Como consejo, no está bueno que los métodos del contenedor o de productos y carritos devuelvan números, porque esos números que pusiste representan el estado 
+de una llamada HTTP, y los métodos tiene que ser independiente de eso. Podés definir qué devolver en función de lo que hace tu método, por ejemplo para eliminar podés 
+devolver true/false para indicar si pudo eliminarlo, o el objeto eliminado si lo pudo hacer y false si no encontró el objeto.
+5- Manejo de errores no vimos aún, pero por ahora lo ideal los try y catch es mejor que estén en los callbacks de las rutas, así si se da algún error se puede devolver 
+un objeto error y establecer un status 500 en la respuesta.
+6- Para temas de permisos (middleware de admin) el status correcto es el 403 

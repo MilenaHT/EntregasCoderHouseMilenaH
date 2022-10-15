@@ -8,39 +8,36 @@ export default class Producto {
     async get(id) {
         try {
             const producto = await this.cont.getById(id);
-            console.log(producto);
-            return producto || 404;
+            return producto || false;
         } catch (e) {
-            return e;
+            return e.message;
         }
     }
 
     async getAll() {
         try {
             const productos = await this.cont.getAll();
-            return productos || 404;
+            return productos || false;
         } catch (e) {
-            return e;
+            return e.message;
         }
     }
 
     async save(prod) {
         try {
             prod.timeStamp = Date.now();
-            const p = this.cont.save(prod);
+            const p = await this.cont.save(prod);
             return p;
         } catch (e) {
-            return e;
+            return e.message;
         }
     }
 
-    async update(prod, id) {
+    async update(id, body) {
         try {
-            //prod.id = Number(id);
-            await this.cont.deleteById(id);
-            await this.cont.save(prod);
+            await this.cont.update(id, body);
         } catch (e) {
-            return e;
+            return e.message;
         }
     }
 
@@ -49,7 +46,7 @@ export default class Producto {
             const deleted = await this.cont.deleteById(id);
             return deleted;
         } catch (e) {
-            return e;
+            return e.message;
         }
     }
 }

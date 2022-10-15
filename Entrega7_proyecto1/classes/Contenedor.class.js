@@ -25,7 +25,7 @@ export default class Contenedor {
       return obj;
     }
     catch (e) {
-      return e;
+      return e.message;
     }
   }
 
@@ -43,7 +43,7 @@ export default class Contenedor {
       }
     }
     catch (e) {
-      return e;
+      return e.message;
     }
   }
 
@@ -53,13 +53,13 @@ export default class Contenedor {
         return (`Error en función (getById()): \n El directorio ${this.filePath} no existe.`);
       } else {
         const contenido = await this.getAll();
-        const prod = contenido.find(prod => prod.id == id);
+        const prod = contenido.find((prod) => prod.id == id);
         if (prod) {
           return prod;
         }
       }
     } catch (e) {
-      return e;
+      return e.message;
     }
   }
 
@@ -72,7 +72,7 @@ export default class Contenedor {
       }
     }
     catch (e) {
-      return e;
+      return e.message;
     }
   }
 
@@ -85,7 +85,7 @@ export default class Contenedor {
       }
     }
     catch (e) {
-      return e;
+      return e.message;
     }
   }
 
@@ -96,15 +96,16 @@ export default class Contenedor {
       } else {
         const aux = await this.getById(id);
         const content = await this.getAll();
-        const eliminado = content.filter(prod => prod.id != id);
-
-        await fs.promises.writeFile(this.filePath, JSON.stringify(eliminado, null, 2));
-
-        if (aux) return 200;
-        else return 404;
+        if (aux) {
+          const eliminado = content.filter(prod => prod.id != id);
+          await fs.promises.writeFile(this.filePath, JSON.stringify(eliminado, null, 2));
+          return true;
+        } else {
+          return false;
+        }
       }
     } catch (e) {
-      return e;
+      return e.message;
     }
   }
 
@@ -113,7 +114,7 @@ export default class Contenedor {
       fs.writeFileSync(this.filePath, JSON.stringify(arr, null, 2));
     }
     catch (e) {
-      return e;
+      return e.message;
     }
   }
 
@@ -126,8 +127,22 @@ export default class Contenedor {
       })
       return maxID + 1;
     } catch (e) {
-      return e;
+      return e.message;
+    }
+  }
+
+  async update(id, body) {
+    try {
+      const listaProd = await this.getAll();
+      let index = listaProd.findIndex((prod) => prod.id == id);
+      listaProd.splice(index, 1, body);
+      body.timeStamp = Date.now();
+      body.id = parseInt(id);
+      listaProd.sort((a, b) => a.id - b.id);
+      await fs.promises.writeFile(this.filePath, JSON.stringify(listaProd, null, 2));
+      return true;
+    } catch (e) {
+      return e.message;
     }
   }
 }
-

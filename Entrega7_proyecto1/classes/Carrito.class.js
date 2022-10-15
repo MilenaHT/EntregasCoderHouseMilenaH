@@ -11,7 +11,7 @@ export default class Carrito {
     async get(id) {
         try {
             const carrito = await this.contCarr.getById(id);
-            return carrito || 404;
+            return carrito || false;
         } catch (e) {
             return e;
         }
@@ -20,7 +20,7 @@ export default class Carrito {
     async getAll() {
         try {
             const carritos = await this.contCarr.getAll()
-            return carritos || 404;
+            return carritos || false;
         } catch (e) {
             return e;
         }
@@ -32,7 +32,7 @@ export default class Carrito {
                 timeStamp: Date.now(),
                 productos: []
             };
-            return await this.contCarr.save(carr) || 400;
+            return await this.contCarr.save(carr) || false;
         } catch (e) {
             return e;
         }
@@ -41,13 +41,13 @@ export default class Carrito {
     async addProd(idCarr, idProd) {
         try {
             const prod = await this.contProd.getById(idProd);
-            if (!prod) return 404;
+            if (!prod) return false;
 
             let target = await this.contCarr.getById(idCarr);
-            if (!target) return 404;
+            if (!target) return false;
 
             let misCarritos = await this.contCarr.getAll();
-            if (!misCarritos) return 404;
+            if (!misCarritos) return false;
 
             misCarritos = misCarritos.filter((carr) => carr.id != target.id)
             target.productos.push(prod);
@@ -74,13 +74,13 @@ export default class Carrito {
     async deleteProd(idCarr, idProd) {
         try {
             const prod = await this.contProd.getById(idProd);
-            if (!prod) return 404;
+            if (!prod) return false;
 
             let misCarritos = await this.contCarr.getAll();
-            if (!misCarritos) return 404;
+            if (!misCarritos) return false;
 
             let target = await this.contCarr.getById(idCarr);
-            if (!target) return 404;
+            if (!target) return false;
 
             misCarritos = misCarritos.filter((carr) => carr.id != idCarr);
 
@@ -88,10 +88,10 @@ export default class Carrito {
             target.timeStamp = Date.now();
             target.id = parseInt(idCarr);
 
-            misCarritos.push(target);
             misCarritos.sort((a, b) => a.id - b.id);
             this.contCarr.saveList(misCarritos);
-            return 200;
+            return true;
+            
         } catch (e) {
             return e;
         }
