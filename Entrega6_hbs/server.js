@@ -57,10 +57,10 @@ const server = httpServer.listen(8080, () => console.log("servidor Levantado"));
 server.on("error", (error) => console.log(`hubo un error ${error}`));
 
 // socket.io productos
-io.on("connection", (socket) => {
+io.on("connection", async (socket) => {
     console.log("se conecto un usuario");
 
-    socket.emit("productos", productos.getAll());
+    socket.emit("productos",  productos.getAll());
 
     socket.on("new-prod", (data) => {
         productos.save(data);

@@ -1,0 +1,26 @@
+h1 {
+    color: blue;
+}
+
+label {
+    font-weight: bold;
+    font-style: italic;
+}
+
+.jumbotron {
+    min-height: 20vh;
+}
+
+p1{
+    color: blue;
+    font-weight: bold;
+}
+
+p2{
+    color: brown;        
+}
+
+p3{
+    color: green;
+    font-style: italic;
+}
