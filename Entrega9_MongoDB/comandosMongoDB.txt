@@ -1,0 +1,146 @@
+//uso mi base de datos creada en MongoDB Compass
+test> use ecommerce
+
+//me aseguro de que liste las colecciones
+ecommerce> show collections
+
+//1) y 2) agrego 10 documentos con valores distintos a cada coleccion
+ecommerce> db.productos.insertMany([
+{'title': 'Cangrejo',
+'price': 120,
+'thumbnail': 'https://cdn4.iconfinder.com/data/icons/seafood-products/512/crab-512.png'
+},
+{'title': 'Coliflor',
+'price': 1123,
+'thumbnail': 'https://cdn4.iconfinder.com/data/icons/vegetable-collection/512/cauliflower-512.png'
+},
+{'title': 'Zanahoria',
+'price': 2000,
+'thumbnail': 'https://cdn4.iconfinder.com/data/icons/vegetable-collection/512/carrot-512.png'
+},
+{'title': 'Durazno',
+'price': 2220,
+'thumbnail': 'https://cdn4.iconfinder.com/data/icons/fruit-collection/512/peach-512.png'
+},
+{'title': 'Naranja',
+'price': 3250,
+'thumbnail': 'https://cdn4.iconfinder.com/data/icons/fruit-collection/512/orange-512.png'
+},
+{'title': 'Ananá',
+'price': 4130,
+'thumbnail': 'https://cdn4.iconfinder.com/data/icons/fruit-collection/512/pineapple-512.png'
+},
+{'title': 'Salamín',
+'price': 1051,
+'thumbnail': 'https://cdn4.iconfinder.com/data/icons/vegetable-collection/512/cauliflower-512.png'
+},
+{'title': 'Fideos',
+'price': 864,
+'thumbnail': 'https://cdn4.iconfinder.com/data/icons/pasta-food-ingredients/512/farfalle-512.png'
+},
+{'title': 'Bife',
+'price': 2415,
+'thumbnail': 'https://cdn4.iconfinder.com/data/icons/meat-products-2/512/chop-512.png'
+},
+{'title': 'Pollo',
+'price': 4816,
+'thumbnail': 'https://cdn4.iconfinder.com/data/icons/meat-products-2/512/chicken-512.png'
+}])
+
+ecommerce> db.mensajes.insertMany([
+{'author': 'Milena',
+    'text': 'Hola!! ',
+    'fechayhora': '2022-10-23T00:49:46.235Z'
+  },
+  {
+    'author': 'Rocio',
+    'text': 'Holaaa',
+    'fechayhora': '2022-10-23T00:50:48.270Z'
+  },
+  {
+    'author': 'Erindor',
+    'text': 'Hi!',
+    'fechayhora': '2022-10-23T00:50:55.185Z'
+  },
+  {
+    'author': 'Rocio',
+    'text': 'Como estan?',
+    'fechayhora': '2022-10-23T00:57:15.849Z'
+  },
+  {
+    'author': 'Milena',
+    'text': 'Todo bien, estudiando ustedes?',
+    'fechayhora': '2022-10-23T00:57:32.007Z'
+  },
+  {
+    'author': 'Erindor',
+    'text': 'Yo también! pero antes debo pasear al perro',
+    'fechayhora': '2022-10-23T00:57:51.477Z'
+  },
+  {
+    'author': 'Rocio',
+    'text': 'Yo también estoy estudiando.. mañana tengo examen',
+    'fechayhora': '2022-10-23T00:57:53.284Z'
+  },
+  {
+    'author': 'Erindor',
+    'text': 'Osea que no vamos a poder jugar WoW?',
+    'fechayhora': '2022-10-23T00:57:55.477Z'
+  },
+  {
+    'author': 'Milena',
+    'text': 'Pah estoy super atrasada, no voy a poder',
+    'fechayhora': '2022-10-23T01:00:16.924Z'
+  },
+  {
+    'author': 'Rocio',
+    'text': 'Estoy igual que Mile, pero mañana después del examen estoy!',
+    'fechayhora': '2022-10-23T01:00:47.881Z'
+  }
+])
+
+//3) listar todos los documentos en cada colección
+//productos
+ecommerce> db.productos.find().pretty()
+
+//mensajes
+ecommerce> db.mensajes.find().pretty()
+
+//4) mostrar la cantidad de documentos almacenados en cada una de ellas
+ecommerce> db.mensajes.countDocuments()
+ecommerce> db.mensajes.countDocuments()
+
+//5) realizar un CRUD sobre la coleccion de prod.
+//a) agregar un prod
+ecommerce> db.productos.insertOne(
+{'title': 'Ketchup',
+'price': 550,
+'thumbnail': 'https://cdn4.iconfinder.com/data/icons/basic-ingredients/512/ketchup-512.png'
+})
+
+//b) Realizar una consulta por nombre de producto específico
+//i. Listar los productos con precio menor a 1000 pesos
+ecommerce> db.productos.find({price:{$lt:1000}})
+
+//ii. Listar los productos con precio entre los 1000 a 3000 peso
+ecommerce> db.productos.find({price:{$gte:1000, $lte:3000}})
+
+//iii. Listar los productos con precio mayor a 3000 pesos.
+ecommerce> db.productos.find({price:{$gt:3000}})
+
+//iv) Realizar una consulta que traiga sólo el nombre del tercer producto más barato.
+ecommerce> db.productos.find({},{'title':1, _id:0}).skip(2).limit(1).sort({'price':1})
+
+//c) Hacer una actualización sobre todos los productos, agregando el campo stock a todos ellos con un valor de 100
+ecommerce> db.productos.updateMany({},{$set:{'stock':100}},{upsert:false, multi:true})
+
+//d) Cambiar el stock a cero de los productos con precios mayores a 4000 pesos.
+ecommerce> db.productos.updateMany({price:{$gt:4000}}, {$set:{'stock':0}}, {multi:true})
+
+//e) Borrar los productos con precio menor a 1000 pesos
+ecommerce> db.productos.deleteMany({price:{$lt:1000}})
+
+//6) Crear un usuario 'pepe' clave: 'asd456' que sólo pueda leer la base de datos ecommerce.
+ecommerce> use admin
+admin> db.createUser({user: 'pepe', pwd: 'asd456', roles: [{role:'read', db:'ecommerce'}]})
+
