@@ -8,5 +8,15 @@
     "stock": 20,
     "timeStamp": 1665018027517,
     "id": 1
+  },
+  {
+    "nombre": "Heladera",
+    "descripcion": "Heladera frio seco",
+    "codigo": "111111",
+    "foto": "https://www.example.com.uy",
+    "precio": 1500,
+    "stock": 20,
+    "timeStamp": 1667069579237,
+    "id": 2
   }
 ]
