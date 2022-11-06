@@ -10,7 +10,7 @@
     "start": "node server.js"
   },
   "keywords": [],
-  "author": "MR",
+  "author": "MH",
   "license": "ISC",
   "dependencies": {
     "ejs": "^3.1.8",

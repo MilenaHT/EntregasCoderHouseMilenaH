@@ -5,6 +5,10 @@ import express from 'express';
 import routerProductos from './routes/productos.router.js';
 import routerCarrito from './routes/carritos.router.js';
 import path from 'path';
+import connectMongo from './DAOs/config.js'
+
+// conexión MongoDB
+connectMongo();
 
 /**
  * Server | express 

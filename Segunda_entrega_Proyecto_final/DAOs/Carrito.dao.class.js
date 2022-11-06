@@ -1,18 +1,15 @@
-import mongoose from "mongoose";
 import ProductsModel from '../models/ProductsModel.js';
 import CartModel from '../models/CartModel.js';
-import mongoUrl from './config.js';
 
 export default class Carrito {
-    constructor() {
+/*     constructor() {
         this.url = mongoUrl;
         this.mongodb = mongoose.connect;
-    }
+    } */
 
 
     async get(id) {
         try {
-            await this.mongodb(this.url);
             return await CartModel.findById(id) || false;
         } catch (e) {
             return e;
@@ -21,7 +18,6 @@ export default class Carrito {
 
     async getAll() {
         try {
-            await this.mongodb(this.url);
             return await CartModel.find() || false;
         } catch (e) {
             return e;
@@ -34,7 +30,6 @@ export default class Carrito {
                 timeStamp: Date.now(),
                 productos: []
             };
-            await this.mongodb(this.url);
             const newCart = new CartModel(carr);
             return await newCart.save() || false;
         } catch (e) {
@@ -44,8 +39,6 @@ export default class Carrito {
 
     async addProd(idCarr, idProd) {
         try {
-            await this.mongodb(this.url);
-
             const prod = await ProductsModel.findById(idProd);
             if (!prod) return false;
 
@@ -61,7 +54,6 @@ export default class Carrito {
 
     async delete(id) {
         try {
-            await this.mongodb(this.url);
             return await CartModel.findByIdAndDelete(id);
         } catch (e) {
             return e;
@@ -70,9 +62,6 @@ export default class Carrito {
 
     async deleteProd(idCarr, idProd) {
         try {
-
-            await this.mongodb(this.url);
-
             const prod = await ProductsModel.findById(idProd);
             if (!prod) return false;
 
