@@ -1,0 +1,78 @@
+[
+  {
+    "entities": {
+      "author": {
+        "user@prueba": {
+          "id": "user@prueba",
+          "nombre": "Maria",
+          "apellido": "Rodriguez",
+          "edad": "12",
+          "alias": "Maru",
+          "avatar": "si"
+        }
+      },
+      "chatSchema": {
+        "mensajes": {
+          "id": "mensajes",
+          "author": "user@prueba",
+          "text": "hola"
+        }
+      }
+    },
+    "result": [
+      "mensajes"
+    ],
+    "id": 1
+  },
+  {
+    "entities": {
+      "author": {
+        "user@prueba": {
+          "id": "user@prueba",
+          "nombre": "Maria",
+          "apellido": "Rodriguez",
+          "edad": "12",
+          "alias": "Maru",
+          "avatar": "si"
+        }
+      },
+      "chatSchema": {
+        "mensajes": {
+          "id": "mensajes",
+          "author": "user@prueba",
+          "text": "??"
+        }
+      }
+    },
+    "result": [
+      "mensajes",
+      "mensajes"
+    ],
+    "id": 2
+  },
+  {
+    "entities": {
+      "author": {
+        "user@prueba": {
+          "id": "user@prueba",
+          "nombre": "Maria",
+          "apellido": "Rodriguez",
+          "edad": "30",
+          "alias": "Maru",
+          "avatar": "si"
+        }
+      },
+      "chatSchema": {
+        "mensajes": {
+          "id": "mensajes",
+          "author": "user@prueba",
+          "text": "gdfa"
+        }
+      }
+    },
+    "result": [
+      "mensajes"
+    ],
+    "id": 3
+  }
+]

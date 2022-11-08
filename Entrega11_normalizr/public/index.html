@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario de Ingreso de Productos</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+        integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/estilos.css">
+</head>
+
+<body>
+
+    <div class="container mt-3">
+        <div class="jumbotron">
+            <h1>Ingrese Producto</h1>
+            <br>
+
+            <form onsubmit="return addProd(this)" id="formProd">
+                <!-- Campo nombre del producto -->
+                <div class="form-group">
+                    <label for="nombre">Nombre</label>
+                    <input id="title" class="form-control" type="text" name="title" required>
+                </div>
+
+                <!-- Campo precio del producto -->
+                <div class="form-group">
+                    <label for="precio">Precio</label>
+                    <input id="price" class="form-control" type="number" step="0.01" name="price" required>
+                </div>
+
+                <!-- Campo url de la foto del producto -->
+                <div class="form-group">
+                    <label for="foto">Foto URL</label>
+                    <input id="thumbnail" class="form-control" type="url" name="thumbnail">
+                </div>
+
+                <!-- Botón de envío -->
+                <button class="btn btn-success mt-3">Enviar</button>
+            </form>
+            <div id="productos"></div>
+        </div>
+    </div>
+    <div class="container mt-3">
+        <div class="jumbotron">
+            <h1 style="color: blue">Centro de Mensajes</h1>
+            <br />
+            <form onsubmit="return addMessage(this)" id="formMens">
+                <input type="text" id="id" placeholder="email@example.com" required /><br />
+                <input type="text" id="nombre" placeholder="Maria" required /><br />
+                <input type="text" id="apellido" placeholder="Rodriguez" required /><br />
+                <input type="number" id="edad" placeholder="30" required /> <br />
+                <input type="text" id="alias" placeholder="Maru" required /> <br />
+                <input type="text" id="avatar" placeholder="http://www.example.com/" required /> <br />
+                <input type="text" id="texto" placeholder="Cuéntanos algo..." required /> <br />
+                <input type="submit" id="bMje" value="Enviar">
+            </form>
+            <div id="mensajes"></div>
+        </div>
+    </div>
+</body>
+<script src="/socket.io/socket.io.js"></script>
+<script src="js/main.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/normalizr@3.6.1/dist/normalizr.browser.min.js"></script>
+
+
+</html>
