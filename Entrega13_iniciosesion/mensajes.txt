@@ -1,0 +1,52 @@
+[
+  {
+    "entities": {
+      "author": {
+        "milenarocio111@gmail.com": {
+          "id": "milenarocio111@gmail.com",
+          "nombre": "Milena",
+          "apellido": "Ht",
+          "edad": "30",
+          "alias": "fdsf",
+          "avatar": "www.codfd.com"
+        }
+      },
+      "chatSchema": {
+        "mensajes": {
+          "id": "mensajes",
+          "author": "milenarocio111@gmail.com",
+          "text": "hola"
+        }
+      }
+    },
+    "result": [
+      "mensajes"
+    ],
+    "id": 1
+  },
+  {
+    "entities": {
+      "author": {
+        "milenarocio111@gmail.com": {
+          "id": "milenarocio111@gmail.com",
+          "nombre": "Milena",
+          "apellido": "Ht",
+          "edad": "30",
+          "alias": "g",
+          "avatar": "sfe"
+        }
+      },
+      "chatSchema": {
+        "mensajes": {
+          "id": "mensajes",
+          "author": "milenarocio111@gmail.com",
+          "text": "ges"
+        }
+      }
+    },
+    "result": [
+      "mensajes"
+    ],
+    "id": 2
+  }
+]
